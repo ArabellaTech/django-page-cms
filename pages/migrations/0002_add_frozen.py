@@ -7,21 +7,21 @@ from pages.models import *
 from pages import settings
 
 class Migration:
-    
+
     def forwards(self, orm):
-        
+
         # Adding field 'Page.freeze_date'
         db.add_column('pages_page', 'freeze_date', orm['pages.page:freeze_date'])
-        
-    
-    
+
+
+
     def backwards(self, orm):
-        
+
         # Deleting field 'Page.freeze_date'
         db.delete_column('pages_page', 'freeze_date')
-        
-    
-    
+
+
+
     models = {
         'auth.group': {
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -102,9 +102,9 @@ class Migration:
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         }
     }
-    if settings.PAGE_TAGGING:
-        models['pages.page']['tags'] = ('tagging.fields.TagField', [], {'null': 'True'})
+    # if settings.PAGE_TAGGING:
+    #     models['pages.page']['tags'] = ('tagging.fields.TagField', [], {'null': 'True'})
     if settings.PAGE_USE_SITE_ID:
         models['pages.page']['sites'] = ('django.db.models.fields.related.ManyToManyField', [], {'default': '[1]', 'to': "orm['sites.Site']"})
-    
+
     complete_apps = ['pages']
